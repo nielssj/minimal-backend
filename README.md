@@ -10,7 +10,7 @@ The features are the following (implementation in parentheis):
 - [x] Persistent storage (Postgres with `pg-promise`)
 - [x] Logging (`log`)
 - [x] Uncaught error handling (custom code)
-- [x] Integration testing (`mocha`, `unexpected`, `instabul`)
+- [x] Integration testing (`mocha`, `unexpected`, `istanbul`)
 - [x] Static analysis, "linting" (`eslint`, `eslint-config-airbnb-base`)
 - [x] Deployment abstraction (Docker container)
 - [x] Configuration (custom code)
@@ -20,7 +20,7 @@ The features are the following (implementation in parentheis):
 
 ## Usage
 
-Run integration tests
+Run integration tests using the following terminal commands. Starts an isolated instance of database and services in a pair of docker containers, runs linting, testing, coverage analysis and shuts all down again afterwards.
 
 ```
 docker-compose build
