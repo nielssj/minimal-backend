@@ -1,0 +1,11 @@
+# Docker compose configuration that allows integration tests to be run
+postgres:
+  image: postgres:9.6
+backend:
+  build: .
+  ports:
+   - "3000:3000"
+  environment:
+   - DB_HOST=postgres
+  links:
+   - postgres

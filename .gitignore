@@ -1,0 +1,8 @@
+# Node.js dependencies
+node_modules/
+
+# WebStorm configuration
+.idea/
+
+# Test coverage reports
+coverage/

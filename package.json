@@ -1,0 +1,35 @@
+{
+  "name": "minimal-backend",
+  "version": "0.0.1",
+  "description": "A minimal monolithic example backend",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "node node_modules/istanbul/lib/cli.js cover node_modules/mocha/bin/_mocha test/ -- --recursive",
+    "coverage": "node node_modules/istanbul/lib/cli.js check-coverage --statement 80",
+    "lint": "node node_modules/eslint/bin/eslint.js -c .eslintrc ."
+  },
+  "author": "Niels Søholm (github.com/nielssj)",
+  "license": "ISC",
+  "devDependencies": {
+    "eslint": "^3.19.0",
+    "eslint-config-airbnb-base": "^11.2.0",
+    "eslint-plugin-import": "^2.3.0",
+    "istanbul": "^0.4.5",
+    "mocha": "^3.4.2",
+    "unexpected": "^10.29.0",
+    "unexpected-express": "^9.0.0"
+  },
+  "dependencies": {
+    "bcrypt": "^1.0.2",
+    "body-parser": "^1.17.2",
+    "express": "^4.15.3",
+    "express-jwt": "^5.3.0",
+    "json-schema": "^0.2.3",
+    "jsonwebtoken": "^7.4.1",
+    "log": "^1.4.0",
+    "mz": "^2.6.0",
+    "pg-promise": "^5.7.1",
+    "uuid": "^3.0.1"
+  }
+}

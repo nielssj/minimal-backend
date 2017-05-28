@@ -1,0 +1,10 @@
+{
+  "id": "http://example.net/root.json",
+  "description" : "User details and credentials",
+  "type" : "object",
+  "additionalProperties": false,
+  "properties" : {
+    "email" : { "type" : "string", "required" : true },
+    "password" : { "type" : "string", "required" : true }
+  }
+}

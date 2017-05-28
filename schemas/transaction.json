@@ -1,0 +1,11 @@
+{
+  "id": "http://example.net/root.json",
+  "description" : "A financial transaction of a given amount of currency",
+  "type" : "object",
+  "additionalProperties": false,
+  "properties" : {
+    "title" : { "type" : "string", "required" : true },
+    "amount" : { "type" : "number", "required" : true },
+    "description" : { "type" : "string" }
+  }
+}
