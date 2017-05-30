@@ -24,7 +24,7 @@ Run integration tests using the following terminal commands. Starts an isolated 
 
 ```
 docker-compose build
-docker-compose up -d rethinkdb
+docker-compose up -d postgres
 docker-compose run backend sh /app/test/run-tests.sh
 docker-compose down
 ```
