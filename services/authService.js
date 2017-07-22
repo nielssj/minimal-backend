@@ -13,10 +13,8 @@ const PUBLIC_PATHS = {
   ],
 };
 
-function init(app) {
-  if (app) {
-    app.use(expressJWT({ secret: JWT_SECRET }).unless(PUBLIC_PATHS));
-  }
+function getMiddleware() {
+  return expressJWT({ secret: JWT_SECRET }).unless(PUBLIC_PATHS);
 }
 
 function hashPassword(password) {
@@ -90,7 +88,7 @@ function logIn(credentials) {
 }
 
 module.exports = {
-  init,
+  getMiddleware,
   createUser,
   logIn,
 };
