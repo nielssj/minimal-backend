@@ -69,9 +69,9 @@ describe('User', () => {
       })
       .then((context) => {
         const response = context.httpResponse;
-        expect(response.body, 'to have properties', { message: 'INVALID_INPUT' });
-        expect(response.body.errors, 'to be an array');
-        expect(response.body.errors, 'to have length', 3);
+        expect(response.body, 'to have properties', { name: 'ValidationError' });
+        expect(response.body.details, 'to be an array');
+        expect(response.body.details, 'to have length', 1);
         done();
       });
   });

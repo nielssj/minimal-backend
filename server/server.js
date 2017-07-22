@@ -1,29 +1,31 @@
 const http = require('http');
 const express = require('express');
 const bodyParser = require('body-parser');
+const swaggerize = require('swaggerize-express');
+const swaggerApi = require('../config/swagger.json');
 const dbUtils = require('../db/dbUtils');
 const logUtils = require('../lib/logUtils');
 const handleError = require('./handleError');
-const transactionRoutes = require('../routes/transactionRoutes');
-const authRoutes = require('../routes/authRoutes');
 const authService = require('../services/authService');
 
 const log = logUtils.getLogger();
 
 const app = express()
-  .use(bodyParser.json());
+  .use(bodyParser.json())
+  .use(authService.getMiddleware())
+  .use(swaggerize({
+    api: swaggerApi,
+    docspath: '/api-docs',
+    handlers: '../handlers',
+  }))
+  .use(handleError);
 
 const server = http.createServer(app);
-
-function bindRoutes() {
-  transactionRoutes(app);
-  authRoutes(app);
-  app.use(handleError);
-}
 
 function listen() {
   return new Promise((resolve, reject) => {
     server.listen(3000, () => {
+      app.swagger.api.host = server.address().address + server.address().port;
       log.info('Example app listening on port 3000!');
       if (process.env.JWT_SECRET) {
         const secretPreview = process.env.JWT_SECRET.substring(0, 5);
@@ -39,11 +41,7 @@ function listen() {
 
 function start() {
   return dbUtils.init()
-    .then(() => {
-      authService.init(app);
-      bindRoutes();
-      return listen();
-    })
+    .then(() => listen())
     .then(() => app)
     .catch((err) => {
       log.error(`Failed to start server: ${err}`);

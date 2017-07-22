@@ -3,10 +3,10 @@ Implements a CRUD (create-read-update-delete) API of personal financial transact
 
 The features are the following (implementation in parentheis):
 
-- [x] RESTful HTTP interface (`express`, `body-parser`)
+- [x] RESTful HTTP interface (`express`, `body-parser`, `swagger`)
 - [x] Authentication (`express-jwt`, `jsonwebtoken`, `bcrypt`)
 - [x] Authorization (custom code)
-- [x] Input validation (`json-schema`)
+- [x] Input validation (`swaggerize-express`)
 - [x] Persistent storage (Postgres with `pg-promise`)
 - [x] Logging (`log`)
 - [x] Uncaught error handling (custom code)
@@ -16,7 +16,7 @@ The features are the following (implementation in parentheis):
 - [x] Configuration (custom code)
 - [ ] Continuous integration setup (*TO BE IMPLEMENTED*)
 - [ ] Deployment pipeline (*TO BE IMPLEMENTED*)
-- [ ] Documentation (*TO BE IMPLEMENTED*)
+- [x] Documentation (`swagger`)
 
 ## Usage
 
