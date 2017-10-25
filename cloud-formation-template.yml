@@ -15,7 +15,6 @@ Resources:
         Variables:
           CreateTransactionName: !Ref CreateTransaction
           GetAllTransactionsName: !Ref GetAllTransactions
-          GetTransactionName: !Ref GetTransaction
     # Handlers
     CreateTransaction:
         Type: AWS::Serverless::Function
