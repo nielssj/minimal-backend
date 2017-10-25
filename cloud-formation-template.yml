@@ -1,0 +1,79 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Parameters:
+  DatabasePassword:
+    Type: String
+    Default: password
+    NoEcho: true
+Resources:
+    # API Gateway
+    Api:
+      Type: AWS::Serverless::Api
+      Properties:
+        StageName: tutorial
+        DefinitionUri: swagger-replaced.json
+        Variables:
+          CreateTransactionName: !Ref CreateTransaction
+          GetAllTransactionsName: !Ref GetAllTransactions
+          GetTransactionName: !Ref GetTransaction
+    # Handlers
+    CreateTransaction:
+        Type: AWS::Serverless::Function
+        Properties:
+          Handler: lambda/transaction.post
+          Runtime: nodejs6.10
+          CodeUri: build/app.zip
+          Policies: AWSLambdaVPCAccessExecutionRole
+          Environment:
+            Variables:
+              DB_HOST: !GetAtt PostgresDatabase.Endpoint.Address
+              DB_PASSWORD: !Ref DatabasePassword
+          Events:
+            PostApi:
+              Type: Api
+              Properties:
+                Path: /transaction
+                Method: POST
+                RestApiId:
+                  Ref: Api
+    GetAllTransactions:
+        Type: AWS::Serverless::Function
+        Properties:
+          Handler: lambda/transaction.get
+          Runtime: nodejs6.10
+          CodeUri: build/app.zip
+          Policies: AWSLambdaVPCAccessExecutionRole
+          Environment:
+            Variables:
+              DB_HOST: !GetAtt PostgresDatabase.Endpoint.Address
+              DB_PASSWORD: !Ref DatabasePassword
+          Events:
+            PostApi:
+              Type: Api
+              Properties:
+                Path: /transaction
+                Method: GET
+                RestApiId:
+                  Ref: Api
+    # Initialization function
+    Initialize:
+        Type: AWS::Serverless::Function
+        Properties:
+          Handler: lambda/init.init
+          Runtime: nodejs6.10
+          CodeUri: build/app.zip
+          Policies: AWSLambdaVPCAccessExecutionRole
+          Environment:
+            Variables:
+              DB_HOST: !GetAtt PostgresDatabase.Endpoint.Address
+              DB_PASSWORD: !Ref DatabasePassword
+    # Database
+    PostgresDatabase:
+      Type: AWS::RDS::DBInstance
+      Properties:
+        AllocatedStorage: 20
+        DBInstanceClass: db.t2.micro
+        Engine: postgres
+        EngineVersion: 9.6.2
+        MasterUsername: master
+        MasterUserPassword: !Ref DatabasePassword

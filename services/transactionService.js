@@ -24,7 +24,7 @@ function readAllTransactions(user) {
   const db = dbUtils.getDb();
   const query = `
     SELECT *
-    FROM "transaction"
+    FROM public.transaction
     WHERE "authorUserId" = $[userId];
   `;
   return db.query(query, { userId: user.id });
