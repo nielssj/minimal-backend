@@ -117,6 +117,7 @@
         "tags": [
           "Transaction"
         ],
+        "operationId": "postTransaction",
         "responses": {
           "200": {
             "description": "Resulting transaction",
@@ -189,6 +190,7 @@
         "tags": [
           "Transaction"
         ],
+        "operationId": "postTransaction",
         "responses": {
           "200": {
             "description": "Transaction with given id",
@@ -366,6 +368,44 @@
           "type": "string"
         }
       }
+    }
+  },
+  "x-ibm-configuration": {
+    "assembly": {
+      "execute": [
+        {
+          "operation-switch": {
+            "case": [
+              {
+                "execute": [
+                  {
+                    "invoke": {
+                      "target-url": "https://openwhisk.eu-gb.bluemix.net/api/v1/web/9la.dk_test/default/postTransaction.http",
+                      "verb": "keep"
+                    }
+                  }
+                ],
+                "operations": [
+                  "postTransaction"
+                ]
+              },
+              {
+                "execute": [
+                  {
+                    "invoke": {
+                      "target-url": "https://openwhisk.eu-gb.bluemix.net/api/v1/web/9la.dk_test/default/getTransaction.http",
+                      "verb": "keep"
+                    }
+                  }
+                ],
+                "operations": [
+                  "getTransaction"
+                ]
+              }
+            ]
+          }
+        }
+      ]
     }
   }
 }
