@@ -190,6 +190,146 @@
           "type": "aws"
         }
       }
+    },
+    "/transaction/{id}": {
+      "get": {
+        "summary": "Get transaction",
+        "description": "Retrieve specific transaction based on id",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id of transaction to be retrieved",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "Authorized token",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Transaction"
+        ],
+        "responses": {
+          "200": {
+            "description": "Transaction with given id",
+            "schema": {
+              "$ref": "#/definitions/Transaction"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "patch": {
+        "summary": "Update transaction",
+        "description": "Patch the transaction with the given id",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id of transaction to be retrieved",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "Authorized token",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "patch",
+            "in": "body",
+            "description": "Object containing keys to be updated and their new values",
+            "required": true,
+            "schema": {
+              "type" : "object",
+              "additionalProperties": false,
+              "properties" : {
+                "authorUserId": {
+                  "type": "string",
+                  "example": "a0e5f29a-d874-4d1a-b81e-bc16e5539a32"
+                },
+                "title" : {
+                  "type" : "string",
+                  "example": "Super Market corp"
+                },
+                "amount" : {
+                  "type" : "number",
+                  "example": 10
+                },
+                "description" : {
+                  "type" : "string",
+                  "example": "Groceries for cooking"
+                }
+              }
+            }
+          }
+        ],
+        "tags": [
+          "Transaction"
+        ],
+        "responses": {
+          "200": {
+            "description": "Resulting transaction",
+            "schema": {
+              "$ref": "#/definitions/Transaction"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete transaction",
+        "description": "Delete specific transaction based on id",
+        "parameters": [{
+          "name": "id",
+          "in": "path",
+          "description": "Id of transaction to be retrieved",
+          "required": true,
+          "type": "string"
+        },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "Authorized token",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Transaction"
+        ],
+        "responses": {
+          "200": {
+            "description": "Deleted transaction",
+            "schema": {
+              "$ref": "#/definitions/Transaction"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
